@@ -119,7 +119,6 @@ const login = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
         return res.json({
             "success": false,
             error
@@ -130,9 +129,17 @@ const login = async (req, res) => {
 const getAvailableRides = async (req, res) => {
     try {
         const { origin, dest, cat, rh } = req.query
-        res.send('rides')
+        const data = await pool.query('select * from vehicles where available=?', ['Y'])
+        res.json({
+            "success": true,
+            "message": "successfully fetched vehicles",
+            "vehicles": data[0][0]
+        })
     } catch (error) {
-
+        return res.json({
+            "success": false,
+            error
+        })
     }
 }
 
