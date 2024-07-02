@@ -145,9 +145,12 @@ const getAvailableRides = async (req, res) => {
 
 const rentCar = async (req, res) => {
     try {
-
+        const { car_id, origin, destination, hours, requirement } = req.body
     } catch (error) {
-
+        return res.json({
+            "success": false,
+            error
+        })
     }
 }
 
