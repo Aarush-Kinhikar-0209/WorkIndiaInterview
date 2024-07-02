@@ -13,7 +13,14 @@ const login = async (req, res) => {
 
 const addNewCar = async (req, res) => {
     try {
-        const { car_id, origin, destination, hours, requirement } = req.body
+        const { category, model, number_plate, current_city, rent_per_hr } = req.body
+
+        const data = await pool.query('insert into vehicles values(?,?,?,?,?)', [category, model, number_plate, current_city, rent_per_hr]);
+
+        return res.json({
+            "success": true,
+            "message": "New Vehicle Added"
+        })
     } catch (error) {
         return res.json({
             "success": false,
@@ -24,7 +31,7 @@ const addNewCar = async (req, res) => {
 
 const rideCompleted = async (req, res) => {
     try {
-        const { car_id, origin, destination, hours, requirement } = req.body
+
     } catch (error) {
         return res.json({
             "success": false,
